@@ -30,7 +30,7 @@ function Header({
 
   return (
     <div className="header">
-      <span className="title">{word ? word : 'Word Hunt'}</span>
+      <span className="title">{word ? word : 'WordLy'}</span>
       <div className="inputs">
         <ThemeProvider theme={darkTheme}>
           <TextField
@@ -40,6 +40,7 @@ function Header({
             variant="standard"
             value={word}
             onChange={(e) => setWord(e.target.value)}
+            autoComplete="off"
           />
           <TextField
             className="select"
