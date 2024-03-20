@@ -1,4 +1,4 @@
-import TextField from '@mui/material/TextField/TextField';
+import TextField from '@mui/material/TextField';
 import './Header.css';
 import createTheme from '@mui/material/styles/createTheme';
 import { MenuItem, ThemeProvider } from '@mui/material';
@@ -9,20 +9,22 @@ function Header({
   setCategory,
   word,
   setWord,
+  mode,
 }: {
   category: string;
-  setCategory: (v: string) => void;
+  setCategory: (w: string) => void;
   word: string;
   setWord: (w: string) => void;
+  mode: boolean;
 }) {
   const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+      mode: mode ? 'light' : 'dark',
     },
   });
 
-  function handleChange(langugage: string) {
-    setCategory(langugage);
+  function handleChange(language: string) {
+    setCategory(language);
     setWord('');
   }
 
@@ -47,11 +49,17 @@ function Header({
             value={category}
             onChange={(e) => handleChange(e.target.value)}
           >
-            {categories.map((option) => (
-              <MenuItem key={option.label} value={option.label}>
-                {option.value}
-              </MenuItem>
-            ))}
+            {categories.map((option) =>
+              option.value == 'English' ? (
+                <MenuItem key={option.label} value={option.label}>
+                  {option.value}
+                </MenuItem>
+              ) : (
+                <MenuItem key={option.label} value={option.label} disabled>
+                  {option.value}
+                </MenuItem>
+              )
+            )}
           </TextField>
         </ThemeProvider>
       </div>
